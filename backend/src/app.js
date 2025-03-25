@@ -6,7 +6,7 @@ import { errorHandler } from './middlewares/errorHandler.middleware.js';
 const app = express();
 
 app.use(cors({
-    origin: "https://nexora-chi.vercel.app/",
+    origin: "https://nexora-2.vercel.app/",
     credentials: true
 }))
 
