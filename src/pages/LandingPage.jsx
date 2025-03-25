@@ -9,6 +9,10 @@ import Popup from '../features/Popup';
 import Loader from '../features/Loader';
 import { useSelector } from 'react-redux';
 import { selectSignupStatus } from '../features/auth/authSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const items1 = [
     { id: 1, content: 'Nexora', duration: 0.5, tailwindClass: "text-6xl font-bold mb-6" },
@@ -180,7 +184,9 @@ function LandingPage() {
           </div>
 
           <button 
-            onClick={() => toast.success('WhatsApp invite sent!')}
+            onClick={() => {toast.success('WhatsApp invite sent!');
+              window.open('https://chat.whatsapp.com/ERzDvgVPd6kFcewob14Sm6', '_blank');
+            }}
             className="bg-green-500 text-white py-3 px-8 rounded-lg font-semibold hover:bg-green-600 transition-colors inline-flex items-center space-x-2"
           >
             <Send className="w-5 h-5" />
@@ -189,6 +195,36 @@ function LandingPage() {
         </div>
       </section>
     </div>
+
+{/* Footer Newly added here */}
+
+    <footer data-name="footer" className="bg-gray-900 text-white py-12">
+                <div data-name="footer-content" className="container mx-auto px-6">
+                    <div data-name="footer-grid" className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div data-name="footer-left">
+                            <h3 data-name="footer-logo" className="text-2xl font-bold mb-4">Nexora</h3>
+                            <p data-name="footer-description" className="text-gray-400 max-w-md">
+                                The future of smart travel planning. Personalized itineraries, real-time updates, and a community of travelers.
+                            </p>
+                        </div>
+                        <div data-name="footer-right" className="flex justify-start md:justify-end items-center space-x-6">
+                            <a href="mailto:nexora195@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa-solid fa-envelope text-2xl"></i>
+                            </a>
+                            <a href="https://www.instagram.com/nexora.official2025?igsh=MWUzaDFwdjNwdHk2NA%3D%3D&utm_source=qr" className="text-gray-400 hover:text-white transition-colors">
+                                <i className="fab fa-instagram text-2xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/company/nexora-official-2025/" className="text-gray-400 hover:text-white transition-colors">
+                                <i className="fab fa-linkedin text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div data-name="footer-bottom" className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                        <p>&copy; {new Date().getFullYear()} Nexora. All rights reserved.</p>
+                    </div>
+                </div>
+    </footer>
+    <ToastContainer />
   </>
   )
 }
