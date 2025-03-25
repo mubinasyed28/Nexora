@@ -10,5 +10,5 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.jsx'], // Allow .jsx without specifying extension
   },
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 })

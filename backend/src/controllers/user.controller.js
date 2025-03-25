@@ -8,8 +8,8 @@ import nodemailer from "nodemailer"
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false, 
+  port: 465,
+  secure: true, 
   auth: {
     user: process.env.EMAIL_USER, 
     pass: process.env.APP_PASS, 
@@ -38,7 +38,7 @@ const sendOtp = asyncHandler(async (req, res) => {
     if (!response) {throw new ApiError(500,'Error sending email')};
         
     res.status(200)
-    .cookie("otp_token", token, { httpOnly: true, maxAge: 300000 })
+    .cookie("otp_token", token, { httpOnly: true, secure : process.env.NODE_ENV === "production", maxAge: 300000 })
     .json(
         new ApiResponse(
           200,
@@ -68,7 +68,7 @@ const sendOtp = asyncHandler(async (req, res) => {
     //   res.cookie("auth_token", authToken, { httpOnly: true, maxAge: 600000 });
   
       res.status(200)
-      .cookie("auth_token", authToken, { httpOnly: true, maxAge: 600000 })
+      .cookie("auth_token", authToken, { httpOnly: true, secure : process.env.NODE_ENV === "production", maxAge: 600000 })
       .json(
         new ApiResponse(
             200, {},
