@@ -84,6 +84,30 @@ function LandingPage() {
     setStep((prev) => prev + 1);
   };
 
+  const [email, setEmail] = React.useState('');
+  const [status, setStatus] = React.useState('');
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log("Entering try block");
+
+      try {
+          const signupData = {
+              email,
+              timestamp: new Date().toISOString()
+          };
+          
+          console.log("try block");
+          await CreateObject('presignup', signupData);//have to create this function
+          setStatus('success');
+          setEmail('');
+      } catch (error) {
+        console.log("hello !!!");
+          console.error('Signup error:', error);
+          setStatus('error');
+      }
+  };
+
   return (
     <>
     <Popup/>
@@ -157,6 +181,52 @@ function LandingPage() {
       </div>}
       </section>
 
+
+            <section id="signup" data-name="signup" className="py-20 bg-white">
+                <div data-name="signup-container" className="container mx-auto px-6 max-w-2xl">
+                    <h2 data-name="signup-title" className="text-3xl md:text-4xl font-bold text-center mb-8">
+                        Be First to Experience Nexora
+                    </h2>
+                    <p data-name="signup-description" className="text-gray-600 text-center mb-12">
+                        Join our waitlist to get early access and exclusive updates about our launch.
+                    </p>
+                    
+                    <form data-name="signup-form" onSubmit={handleSubmit} className="space-y-4">
+                        <div data-name="input-group" className="flex flex-col md:flex-row gap-4">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                                className="flex-1 px-6 py-4 rounded-lg border border-gray-300 input-focus"
+                            />
+                            <button
+                                type="submit"
+                                className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                            >
+                                Join Waitlist
+                            </button>
+                        </div>
+                        
+                        {status === 'success' && (
+                            <div data-name="success-message" className="text-green-600 text-center">
+                                Thanks for signing up! We'll keep you updated.
+                            </div>
+                        )}
+                        
+                        {status === 'error' && (
+                            <div data-name="error-message" className="text-red-600 text-center">
+                                Oops! Something went wrong. Please try again.
+                            </div>
+                        )}
+                    </form>
+                </div>
+            </section>
+ 
+
+
+
       <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8">Join Our WhatsApp Community</h2>
@@ -212,7 +282,7 @@ function LandingPage() {
                             <i class="fa-solid fa-envelope text-2xl"></i>
                             </a>
                             <a href="https://www.instagram.com/nexora.official2025?igsh=MWUzaDFwdjNwdHk2NA%3D%3D&utm_source=qr" className="text-gray-400 hover:text-white transition-colors">
-                                <i className="fab fa-instagram text-2xl"></i>
+                                <i className="fab fa-instagram text-2xl mr-5"></i>
                             </a>
                             <a href="https://www.linkedin.com/company/nexora-official-2025/" className="text-gray-400 hover:text-white transition-colors">
                                 <i className="fab fa-linkedin text-2xl"></i>
