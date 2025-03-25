@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": "http://localhost:8000"
+      "/api": process.env.BACKEND_URL,
     },
   },
   resolve: {
